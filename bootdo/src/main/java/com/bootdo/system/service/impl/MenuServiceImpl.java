@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@SuppressWarnings("AlibabaRemoveCommentedCode")
 @Service
 @Transactional(readOnly = true,rollbackFor = Exception.class)
 public class MenuServiceImpl implements MenuService {
@@ -49,8 +48,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public List<MenuDO> list() {
-		List<MenuDO> menus = menuMapper.list(new HashMap<String,Object>(16));
+	public List<MenuDO> list(Map<String, Object> params) {
+		List<MenuDO> menus = menuMapper.list(params);
 		return menus;
 	}
 

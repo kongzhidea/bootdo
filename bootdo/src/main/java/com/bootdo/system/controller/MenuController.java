@@ -14,7 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+/**
+ * @author bootdo 1992lcg@163.com
+ */
 @RequestMapping("/sys/menu")
 @Controller
 public class MenuController extends BaseController {
@@ -31,8 +35,8 @@ public class MenuController extends BaseController {
 	@RequiresPermissions("sys:menu:menu")
 	@RequestMapping("/list")
 	@ResponseBody
-	List<MenuDO> list() {
-		List<MenuDO> menus = menuService.list();
+	List<MenuDO> list(@RequestParam Map<String, Object> params) {
+		List<MenuDO> menus = menuService.list(params);
 		return menus;
 	}
 
@@ -113,16 +117,14 @@ public class MenuController extends BaseController {
 	@GetMapping("/tree")
 	@ResponseBody
 	Tree<MenuDO> tree() {
-		Tree<MenuDO> tree = new Tree<MenuDO>();
-		tree = menuService.getTree();
+		Tree<MenuDO>  tree = menuService.getTree();
 		return tree;
 	}
 
 	@GetMapping("/tree/{roleId}")
 	@ResponseBody
 	Tree<MenuDO> tree(@PathVariable("roleId") Long roleId) {
-		Tree<MenuDO> tree = new Tree<MenuDO>();
-		tree = menuService.getTree(roleId);
+		Tree<MenuDO> tree = menuService.getTree(roleId);
 		return tree;
 	}
 }
